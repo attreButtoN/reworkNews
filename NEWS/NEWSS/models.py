@@ -1,10 +1,13 @@
+
 from django.db import models
-from rest_framework import generics
 
 
 class Themes(models.Model):
 
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, unique=True)
+
+    def validate_unique(self, exclude="Данная тема уже существует"):
+        raise exclude
 
     def __str__(self):
         return self.title
@@ -16,9 +19,12 @@ class NEWSS(models.Model):
     date_of_creation = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Date of creation",
+        editable=False,
+
     )
     date_of_update = models.DateTimeField(
-        auto_now_add=True, verbose_name="Date of update"
+        auto_now=True,
+        verbose_name="Date of update"
     )
     status = models.BooleanField(auto_created=True, verbose_name="Status")
     theme = models.ForeignKey("Themes", on_delete=models.PROTECT)
@@ -28,4 +34,3 @@ class NEWSS(models.Model):
 
     def __str__(self):
         return self.name
-

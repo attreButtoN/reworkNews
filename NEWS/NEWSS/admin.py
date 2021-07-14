@@ -6,6 +6,7 @@ class ThemeAdmin(admin.ModelAdmin):
     list_display = "title"
     search_fields = "title"
     list_editable = "title"
+    display_fields = 'title'
 
 
 class NewsAdmin(admin.ModelAdmin):
@@ -42,6 +43,8 @@ class NewsAdmin(admin.ModelAdmin):
     #     "theme",
     #     "status",
     # )
+    #
 
 
-admin.site.register(NEWSS,NewsAdmin)
+admin.site.register(NEWSS, NewsAdmin)
+admin.site.register(Themes, NewsAdmin)
